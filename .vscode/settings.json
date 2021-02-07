@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/b65e676f-dac3-4267-ab09-8bd2ac309b1f/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/penguin-prj-mngm-appservice",
+    "appService.deploySubpath": "."
+}
