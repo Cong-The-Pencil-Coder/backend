@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
 const projectRoutes = require('./routes/projectRoutes');
+const cors = require('cors')
 // Create the server with Express and PORT
 const app = express();
 const PORT = 8080;
@@ -14,7 +15,7 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
         app.listen(PORT, () => console.log(`Server Running on port: http://localhost:${PORT}`));
     })
     .catch((err) => console.log(err));
-
+app.use(cors())
 // "Hello from homepage" is shown  when visiting http://localhost:8080/
 app.get('/', (req, res) => res.send('Hello from homepage.'));
 
