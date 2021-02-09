@@ -17,7 +17,7 @@ const project_details = (req, res) => {
             res.status(200).send(result);
         })
         .catch(err => {
-            res.status(400).send(`There is an error in the server while loading this project`);
+            res.status(400).send(err);
         });
 }
 
@@ -25,10 +25,10 @@ const project_create = (req, res) => {
     const project = new Project(req.body);
     project.save()
         .then(result => {
-            res.status(201).send(`Project is added to the database`);
+            res.status(201).send(result);
         })
         .catch(err => {
-            res.status(400).send(`There is an error in the server while adding this project`);
+            res.status(400).send(err);
         });
 }
 
@@ -36,10 +36,10 @@ const project_delete = (req, res) => {
     const id = req.params.id;
     Project.findByIdAndDelete(id)
         .then(result => {
-            res.status(200).send("Project is deleted successfully");
+            res.status(200).send(result);
         })
         .catch(err => {
-            res.status(400).send(`There is an error in the server while deleting this project`);
+            res.status(400).send(err);
         });
 }
 
