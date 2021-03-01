@@ -1,4 +1,4 @@
-const Project = require('../models/project');
+const { Project, Feature } = require('../models/project');
 
 const project_index = (req, res) => {
     Project.find().sort({ createdAt: -1 })
@@ -43,9 +43,38 @@ const project_delete = (req, res) => {
         });
 }
 
+const feature_add = (req, res) => {
+    const id = req.params.id;
+    const feature = new Feature(req.body);
+    Project.findOneAndUpdate(
+        {_id: id},
+        {$push: {'prj_features': feature}}
+    ).then(result => {
+        res.status(200).send(result);
+    })
+    .catch(err => {
+        res.status(400).send(err);
+    });
+}
+
+const feature_get = (req, res) => {
+    const id = req.params.id;
+    Project.findById(id)
+        .then(project => {
+            res.status(200).send(project.prj_features);
+        })
+        .catch(err => {
+            res.status(400).send(err);
+        })
+}
+
+
 module.exports = {
     project_index,
     project_details,
     project_create,
-    project_delete
+    project_delete,
+
+    feature_get,
+    feature_add,
 }
